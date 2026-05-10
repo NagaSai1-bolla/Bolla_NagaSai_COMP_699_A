@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Staff Dashboard</h2>
+
+{% if desks %}
+<table border="1">
+    <tr>
+        <th>Desk</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for d in desks %}
+    <tr>
+        <td>{{ d.desk_type }}</td>
+
+        <td>
+            {% if d.is_open %} Open {% else %} Closed {% endif %}
+        </td>
+
+        <td>
+            <a href="/staff/open/{{ d.id }}">Open</a>
+            <a href="/staff/pause/{{ d.id }}">Pause</a>
+            <a href="/staff/next/{{ d.id }}">Serve Next</a>
+            <a href="/staff/report/{{ d.id }}">Report</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No desk assigned. Contact admin.</p>
+{% endif %}
+
+<br>
+<a href="/staff/export">Export Logs</a>
+
+{% endblock %}

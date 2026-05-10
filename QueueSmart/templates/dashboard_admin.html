@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="admin-header">
+    <h2>Admin Control Panel</h2>
+    <p>Manage service desks, staff, assignments, and system performance.</p>
+</div>
+
+<div class="admin-grid">
+
+    <!-- CREATE DESK -->
+    <div class="admin-card">
+        <h3>Create Service Desk</h3>
+        <form method="POST" action="/admin/create_desk">
+            <input type="text" name="desk_type" placeholder="Enter Desk Name (OPD / Lab / Pharmacy)" required>
+            <button class="admin-btn">Create Desk</button>
+        </form>
+    </div>
+
+    <!-- CREATE STAFF -->
+    <div class="admin-card">
+        <h3>Create Staff</h3>
+        <form method="POST" action="/admin/create_staff">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button class="admin-btn">Create Staff</button>
+        </form>
+    </div>
+
+    <!-- ASSIGN STAFF -->
+    <div class="admin-card">
+        <h3>Assign Staff to Desk</h3>
+        <form method="POST" action="/admin/assign">
+
+            <select name="desk_id" required>
+                <option value="">Select Desk</option>
+                {% for d in desks %}
+                    <option value="{{ d.id }}">{{ d.desk_type }}</option>
+                {% endfor %}
+            </select>
+
+            <select name="staff_id" required>
+                <option value="">Select Staff</option>
+                {% for s in staff %}
+                    <option value="{{ s.id }}">{{ s.name }}</option>
+                {% endfor %}
+            </select>
+
+            <button class="admin-btn">Assign Staff</button>
+        </form>
+    </div>
+
+</div>
+
+<!-- SERVICE DESKS TABLE -->
+<div class="admin-card full-width">
+    <h3>Service Desks</h3>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Desk Type</th>
+                <th>Status</th>
+                <th>Assigned Staff</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for d in desks %}
+            <tr>
+                <td>{{ d.id }}</td>
+                <td>{{ d.desk_type }}</td>
+
+                <td>
+                    {% if d.is_open %}
+                        <span class="badge badge-open">Open</span>
+                    {% else %}
+                        <span class="badge badge-closed">Closed</span>
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if d.staff_name %}
+                        {{ d.staff_name }}
+                    {% else %}
+                        <span style="color:#999;">Not Assigned</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- REPORTS -->
+<div class="admin-card full-width">
+    <h3>System Reports</h3>
+
+    <table class="admin-table">
+        <thead>
+            <tr>
+                <th>Desk</th>
+                <th>Patients Served</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for r in report %}
+            <tr>
+                <td>{{ r.desk_id }}</td>
+                <td>{{ r.total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- ML BUTTON -->
+<div class="admin-actions">
+    <a href="/admin/train" class="ml-btn">Train Waiting Time Model</a>
+</div>
+
+{% endblock %}

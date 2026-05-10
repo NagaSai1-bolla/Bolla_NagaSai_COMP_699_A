@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="report-container">
+
+    <div class="dashboard-header">
+        <h2>📊 Service Performance Report</h2>
+        <p>
+            View key performance metrics for the selected service desk.
+        </p>
+    </div>
+
+    <!-- ===== METRICS ===== -->
+    <div class="report-grid">
+
+        <div class="report-card">
+            <h3>Total Patients Served</h3>
+            <p>{{ data.throughput }}</p>
+        </div>
+
+        <div class="report-card">
+            <h3>Average Service Time</h3>
+            <p>{{ data.avg_time }} sec</p>
+        </div>
+
+    </div>
+
+    <!-- ===== EXTRA INFO ===== -->
+    <div class="card" style="margin-top:20px;">
+        <h3>📌 Insight</h3>
+        <p>
+            These metrics help staff understand service efficiency and improve patient handling.
+            Lower service time leads to faster queue movement and better patient satisfaction.
+        </p>
+    </div>
+
+    <!-- ===== ACTION ===== -->
+    <div class="report-actions">
+        <a class="btn" href="/staff/dashboard">⬅ Back to Dashboard</a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="dashboard-header">
+    <h2>Patient Dashboard</h2>
+    <p>Select a service and monitor your queue status.</p>
+</div>
+
+<!-- ===== ACTIVE QUEUE STATUS ===== -->
+{% if active_status %}
+<div class="card">
+    <h3>Your Active Queue</h3>
+
+    {% for item in active_status %}
+        <div class="notification-box">
+            <strong>{{ item.desk.desk_type }}</strong><br>
+            Position: {{ item.status.position }} |
+            Wait: {{ item.status.predicted_wait }} mins |
+            {{ item.status.arrival_window }}
+
+            <br><br>
+            <a class="btn" href="/patient/status/{{ item.desk.id }}">View Details</a>
+            <a class="btn danger" href="/patient/leave/{{ item.desk.id }}">Leave</a>
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- ===== SERVICE LIST ===== -->
+<div class="service-grid">
+
+    {% for desk in desks %}
+    <div class="service-card">
+
+        <h3>{{ desk.desk_type }}</h3>
+
+        {% if desk.is_open %}
+            <span class="badge badge-open">Open</span>
+            <br><br>
+            <a class="join-btn" href="/patient/join/{{ desk.id }}">Join Queue</a>
+        {% else %}
+            <span class="badge badge-closed">Closed</span>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+
+</div>
+
+<!-- ===== NOTIFICATIONS ===== -->
+<div class="notifications">
+    <h3>Notifications</h3>
+
+    {% if notifications %}
+        {% for note in notifications %}
+            <div class="notification-box">
+                {{ note.message }}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="notification-box">
+            No notifications yet.
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- ===== HERO CONTENT (ALREADY FROM BASE, THIS IS EXTRA SECTION) ===== -->
+
+<div class="landing-container">
+
+    <!-- ===== INTRO SECTION ===== -->
+    <div class="landing-card">
+        <h2>🚀 Welcome to QueueSmart</h2>
+        <p>
+            QueueSmart is an intelligent hospital queue management system designed to eliminate long waiting lines.
+            Patients can join queues digitally, track their position, and arrive only when their turn is near.
+        </p>
+    </div>
+
+    <!-- ===== FEATURES SECTION ===== -->
+    <div class="feature-section">
+
+        <h2>✨ Key Features</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Live Queue Tracking</h3>
+                <p>View your real-time position in the queue instantly.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">⏱</div>
+                <h3>AI Wait Prediction</h3>
+                <p>Get estimated waiting time using machine learning.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3>Smart Alerts</h3>
+                <p>Receive notifications when your turn is near.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏥</div>
+                <h3>Multiple Services</h3>
+                <p>Access OPD, Lab, and Pharmacy queues in one place.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ===== BENEFITS SECTION ===== -->
+    <div class="landing-card">
+
+        <h2>💡 Why Use QueueSmart?</h2>
+
+        <ul class="benefits-list">
+            <li>✔ Avoid long waiting lines</li>
+            <li>✔ Save valuable time</li>
+            <li>✔ Reduce hospital crowd</li>
+            <li>✔ Improve patient experience</li>
+        </ul>
+
+    </div>
+
+    <!-- ===== CALL TO ACTION ===== -->
+    <div class="cta-section">
+
+        <h2>Start Your Smart Healthcare Experience</h2>
+        <p>Join now and experience hassle-free hospital visits.</p>
+
+        <a href="/register" class="primary">Create Account</a>
+        <a href="/login" class="secondary">Login</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

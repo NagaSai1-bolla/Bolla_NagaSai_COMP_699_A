@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h2>Welcome Back 👋</h2>
+        <p>
+            Login to access your QueueSmart dashboard and manage your hospital visits efficiently.
+        </p>
+
+        <form method="POST">
+
+            <div class="input-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button class="auth-btn" type="submit">Login</button>
+
+        </form>
+
+        <div class="auth-links">
+            <p>New to QueueSmart? <a href="/register">Create an account</a></p>
+            <p><a href="/reset_password">Forgot your password?</a></p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
